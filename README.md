@@ -1,226 +1,225 @@
 # Dimzzy E-Commerce
 
-🍜 **Dimsum + Keju = Dimzzy!** - E-Commerce platform dengan sistem kupon berbasis game dan payment gateway QRIS.
+E-Commerce platform with gamification-based coupon system and QRIS payment integration.
 
-## 🎮 Features
+## Overview
 
-### 1. **E-Commerce Core**
-- 🛒 Shopping Cart System
-- 📦 Product Management
-- 💳 Checkout Process
+Dimzzy is a Laravel-based e-commerce application that rewards customers with discount coupons for playing mini-games. The platform integrates with YoGateway for seamless QRIS payment processing.
 
-### 2. **Gamification & Rewards**
-- 🎯 Mini Games (Ping Pong, Snake)
-- 🎟️ Score-based Coupon System
-- 💰 Discount Rewards (5-45%)
-- ⏰ Daily Limits (3 coupons/day)
-- 📅 7-day Validity Period
+## Key Features
 
-### 3. **Payment Integration**
-- 💳 YoGateway QRIS Payment
-- ⚡ Real-time Status Checking
-- 🔄 Auto-redirect on Success
-- 📱 Mobile-friendly Payment
+### E-Commerce
+- Product catalog and management
+- Shopping cart system
+- Checkout process with coupon support
+- Order tracking and management
 
-### 4. **Coupon System**
-- 🎁 Auto-generation on Game Completion
-- 🔢 Score-based Discount Calculation
-- ✅ Validation & Expiry Management
-- 📊 Usage Tracking
+### Gamification System
+- Mini-games (Ping Pong, Snake)
+- Score-based reward mechanism
+- Automatic coupon generation
+- Daily earning limits (3 coupons per day)
+- 7-day coupon validity period
 
-## 🚀 Tech Stack
+### Payment Integration
+- YoGateway QRIS payment gateway
+- Real-time payment status verification
+- Automatic order confirmation
+- Mobile-optimized payment interface
+
+### Coupon Management
+- Dynamic discount calculation (5-45% based on score)
+- Unique coupon code generation (GAME-XXXXX format)
+- Expiration and usage tracking
+- Minimum purchase requirements
+
+## Technical Stack
 
 - **Framework:** Laravel 12
-- **PHP:** 8.2+
+- **PHP Version:** 8.2+
 - **Database:** MySQL 8.0+
-- **Frontend:** Blade, Bootstrap 5, jQuery
-- **Payment:** YoGateway API
-- **Server:** Nginx, PHP-FPM
+- **Frontend:** Blade Templates, Bootstrap 5, jQuery
+- **Payment Gateway:** YoGateway API
+- **Web Server:** Nginx with PHP-FPM
 
-## 📋 Requirements
+## System Requirements
 
 - PHP >= 8.2
 - Composer
-- MySQL >= 8.0
-- Node.js & NPM (for Vite)
+- MySQL >= 8.0 or MariaDB >= 10.5
+- Node.js and NPM
 - Git
 
-## 🛠️ Installation
+## Installation
 
-### Local Development
+### Local Development Setup
 
 ```bash
-# Clone repository
 git clone https://github.com/mahinutsmannawawi20-svg/Dimzzy-E-Commerce.git
 cd Dimzzy-E-Commerce
 
-# Install dependencies
 composer install
 npm install
 
-# Setup environment
 cp .env.example .env
 php artisan key:generate
 
-# Configure database in .env
-DB_DATABASE=dimzzy_larvel
-DB_USERNAME=root
-DB_PASSWORD=
-
-# Run migrations
+# Configure database credentials in .env
 php artisan migrate
 
-# Start development server
 php artisan serve
 npm run dev
 ```
 
 ### Production Deployment
 
-See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed deployment instructions.
+Refer to [DEPLOYMENT.md](DEPLOYMENT.md) for comprehensive deployment instructions.
 
-## 🎯 How It Works
+## Configuration
 
-### Coupon Generation Flow
-
-1. **Play Game** → Score ≥ 1000 points
-2. **Earn Coupon** → Discount = Score ÷ 200 (max 45%)
-3. **Receive Code** → Format: GAME-XXXXX
-4. **Use Coupon** → Apply at checkout
-5. **Get Discount** → Percentage off total
-
-### Payment Flow
-
-1. **Add to Cart** → Select products
-2. **Apply Coupon** → Optional discount
-3. **Checkout** → Fill customer info
-4. **QRIS Payment** → Scan with e-wallet
-5. **Auto-verify** → Status checked every 3s
-6. **Success** → Order confirmed, cart cleared
-
-## 📁 Project Structure
-
-```
-Dimzzy-E-Commerce/
-├── app/
-│   ├── Http/Controllers/
-│   │   ├── CartController.php
-│   │   ├── CouponController.php
-│   │   ├── PaymentController.php
-│   │   └── ScoreMinigameController.php
-│   ├── Models/
-│   │   ├── Coupon.php
-│   │   ├── Order.php
-│   │   ├── Payment.php
-│   │   └── Products.php
-│   ├── Services/
-│   │   └── YoGatewayService.php
-│   └── Helpers/
-│       └── CartHelper.php
-├── database/
-│   └── migrations/
-│       ├── create_coupons_table.php
-│       ├── create_orders_table.php
-│       └── create_payments_table.php
-├── resources/
-│   ├── views/
-│   │   ├── cart.blade.php
-│   │   ├── checkout.blade.php
-│   │   ├── coupons/
-│   │   ├── payment/
-│   │   └── games/
-│   └── js/
-│       └── pingpong.js
-└── routes/
-    └── web.php
-```
-
-## 🔑 Environment Variables
+### Environment Variables
 
 ```env
-# Application
 APP_NAME=Dimzzy
 APP_ENV=production
-APP_URL=https://dimzzy.my.id
+APP_URL=https://your-domain.com
 
-# Database
-DB_DATABASE=dimzzy_production
-DB_USERNAME=dimzzy_user
+DB_DATABASE=your_database
+DB_USERNAME=your_username
 DB_PASSWORD=your_password
 
-# YoGateway Payment
-YOGATEWAY_API_KEY=yo_sec_xxxxx
+YOGATEWAY_API_KEY=your_api_key
 YOGATEWAY_BASE_URL=https://yogateway.web.id/api.php
 ```
 
-## 🧪 Testing
+## Application Flow
 
-### Test Coupon System
+### Coupon Generation
+
+1. User plays mini-game and achieves score >= 1000
+2. System calculates discount: Score / 200 (maximum 45%)
+3. Unique coupon code generated automatically
+4. Coupon stored with 7-day expiration
+5. User can view and manage coupons in dashboard
+
+### Payment Process
+
+1. Customer adds products to cart
+2. Optional coupon application for discount
+3. Checkout with customer information
+4. QRIS code generation via YoGateway
+5. Real-time payment status monitoring (3-second intervals)
+6. Automatic order confirmation upon successful payment
+7. Cart clearance and coupon usage marking
+
+## Project Structure
+
+```
+app/
+├── Http/Controllers/
+│   ├── CartController.php
+│   ├── CouponController.php
+│   ├── PaymentController.php
+│   └── ScoreMinigameController.php
+├── Models/
+│   ├── Coupon.php
+│   ├── Order.php
+│   ├── Payment.php
+│   └── Products.php
+├── Services/
+│   └── YoGatewayService.php
+└── Helpers/
+    └── CartHelper.php
+
+database/migrations/
+├── create_coupons_table.php
+├── create_orders_table.php
+└── create_payments_table.php
+
+resources/
+├── views/
+│   ├── cart.blade.php
+│   ├── checkout.blade.php
+│   ├── coupons/
+│   ├── payment/
+│   └── games/
+└── js/
+    └── pingpong.js
+```
+
+## Database Schema
+
+### Coupons
+Stores generated discount coupons with player information, game type, score, discount percentage, usage status, and expiration date.
+
+### Orders
+Contains customer details, purchased items (JSON), payment status, applied coupon, and YoGateway transaction reference.
+
+### Payments
+Tracks payment transactions with YoGateway response data, transaction IDs, amounts, and status updates.
+
+## API Integration
+
+### YoGateway Endpoints
+
+**Create Payment**
+```
+GET https://yogateway.web.id/api.php?action=createpayment&apikey={key}&amount={amount}
+```
+
+**Check Status**
+```
+GET https://yogateway.web.id/api.php?action=checkstatus&apikey={key}&trxid={trxid}
+```
+
+## Testing
+
+### Coupon System Test
 ```bash
-# Visit game
+# Access game interface
 http://localhost:8000/pingpong
 
-# Play until score ≥ 1000
-# Check coupon generated
+# Play until score reaches 1000+
+# Verify coupon generation
 http://localhost:8000/my-coupons
 ```
 
-### Test Payment
+### Payment Flow Test
 ```bash
 # Add products to cart
-# Apply coupon
-# Checkout with test data
-# Scan QRIS (sandbox mode)
+# Apply test coupon
+# Complete checkout process
+# Scan generated QRIS code
+# Verify payment confirmation
 ```
 
-## 📊 Database Schema
+## Security Considerations
 
-### Coupons Table
-- Stores generated coupons
-- Tracks usage and expiry
-- Links to player and game
+- Environment variables for sensitive data
+- CSRF protection on all forms
+- SQL injection prevention via Eloquent ORM
+- XSS protection through Blade templating
+- Secure payment verification
 
-### Orders Table
-- Customer information
-- Cart items (JSON)
-- Payment status
-- Coupon applied
-
-### Payments Table
-- Transaction records
-- YoGateway response data
-- Payment status tracking
-
-## 🎨 Screenshots
-
-*Coming soon...*
-
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
-2. Create feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit changes (`git commit -m 'Add AmazingFeature'`)
-4. Push to branch (`git push origin feature/AmazingFeature`)
-5. Open Pull Request
+2. Create feature branch
+3. Commit changes with clear messages
+4. Push to branch
+5. Submit pull request
 
-## 📝 License
+## License
 
-This project is private and proprietary.
+Proprietary and confidential.
 
-## 👨‍💻 Developer
+## Author
 
-**Mahinu Tsmann Awawi**
-- GitHub: [@mahinutsmannawawi20-svg](https://github.com/mahinutsmannawawi20-svg)
+Mahinu Tsmann Awawi
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - Laravel Framework
 - YoGateway Payment Gateway
-- Bootstrap
-- Font Awesome
-
----
-
-**Made with ❤️ for Dimzzy**
-
-*Setiap Gigitan Lumer, Setiap Suapan Bikin Nagih!*
+- Bootstrap CSS Framework
+- Font Awesome Icons

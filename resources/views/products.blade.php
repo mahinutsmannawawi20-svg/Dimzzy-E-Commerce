@@ -59,6 +59,12 @@
                                         <a class="nav-link" href="/my-coupons"><i class="fa-solid fa-ticket"></i> Kupon</a>
                                     </li>
                                     <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('wishlist.index') }}">
+                                            <i class="fa-solid fa-heart"></i>
+                                            <span class="badge bg-danger" id="wishlistCount" style="font-size: 10px; vertical-align: super;">{{ $wishlistCount ?? 0 }}</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
                                         <a class="nav-link" href="/cart">
                                             <i class="fa-solid fa-cart-shopping"></i>
                                             <span class="badge bg-danger" id="cartCount">0</span>
@@ -85,11 +91,11 @@
                 @foreach($products as $product)
                     <div class="col-sm-4" data-aos="fade-up">
                         <div class="innerproductsection">
-                            <img src="{{ asset($product->foto) }}" alt="{{ $product->nama_produk }}" />
+                            <img src="{{ asset($product->foto) }}" alt="{{ $product->nama_produk }}" style="height: 250px; object-fit: cover;" />
                             <div class="cartcontainer">
-                                <button class="wishlist"><i class="fa-solid fa-heart"></i></button>
-                                <button class="btn" onclick="addToCart({{ $product->id }})">Tambah ke Keranjang <i class="fa-solid fa-cart-plus"></i></button>
-                                <button class="share"><i class="fa-solid fa-share"></i></button>
+                                <button class="wishlist" onclick="toggleWishlist({{ $product->id }})"><i class="fa-solid fa-heart"></i></button>
+                                <button class="btn" onclick="addToCart({{ $product->id }})"><i class="fa-solid fa-cart-shopping"></i></button>
+                                <button class="share" onclick="alert('Fitur Share segera hadir! 🔗')"><i class="fa-solid fa-share"></i></button>
                             </div>
                             <h2>{{ $product->nama_produk }}</h2>
                             <h1 class="price"><span class="clrchange">Rp {{ number_format($product->harga, 0, ',', '.') }}</span></h1>
@@ -157,12 +163,42 @@
                 },
                 success: function(response) {
                     if (response.success) {
-                        $('#cartCount').text(response.cart_count);
-                        alert('Produk berhasil ditambahkan ke keranjang!');
+                        alert('Produk berhasil ditambahkan ke keranjang! 🛒');
+                        // Update cart badge
+                        if (response.cart_count) {
+                            $('#cartCount').text(response.cart_count);
+                        }
+                    } else {
+                        alert('Gagal: ' + response.message);
                     }
                 },
                 error: function(xhr) {
-                    alert('Gagal menambahkan produk ke keranjang');
+                    console.error(xhr);
+                    alert('Terjadi kesalahan saat menambahkan ke keranjang.');
+                }
+            });
+        }
+
+        // Toggle Wishlist Function
+        function toggleWishlist(productId) {
+            $.ajax({
+                url: '/wishlist/toggle',
+                method: 'POST',
+                data: {
+                    product_id: productId
+                },
+                success: function(response) {
+                    if (response.success) {
+                        alert(response.message);
+                        // Update wishlist badge
+                        if (response.wishlist_count !== undefined) {
+                            $('#wishlistCount').text(response.wishlist_count);
+                        }
+                    }
+                },
+                error: function(xhr) {
+                    console.error(xhr);
+                    alert('Terjadi kesalahan saat menambahkan ke wishlist.');
                 }
             });
         }

@@ -23,17 +23,17 @@
                     <div class="row">
                         <div class="col-6">
                             <p class="mb-0" style="font-size: 12px; color: #666;">Diskon</p>
-                            <h4 id="discountPercentage" style="color: #667eea; margin: 0;">-</h4>
+                            <h4 id="modal-discountPercentage" style="color: #667eea; margin: 0;">-</h4>
                         </div>
                         <div class="col-6">
                             <p class="mb-0" style="font-size: 12px; color: #666;">Berlaku Hingga</p>
-                            <p id="expiredAt" style="font-weight: bold; margin: 0;">-</p>
+                            <p id="modal-expiredAt" style="font-weight: bold; margin: 0;">-</p>
                         </div>
                     </div>
                 </div>
 
                 <p style="font-size: 13px; color: #666;">
-                    <i class="fa-solid fa-info-circle"></i> Minimal pembelian: <span id="minPurchase">Rp 10.000</span>
+                    <i class="fa-solid fa-info-circle"></i> Minimal pembelian: <span id="modal-minPurchase">Rp 10.000</span>
                 </p>
 
                 <div class="d-grid gap-2">
@@ -65,9 +65,9 @@ function showCouponModal(couponData) {
     }
 
     document.getElementById('generatedCouponCode').textContent = couponData.code;
-    document.getElementById('discountPercentage').textContent = couponData.discount_percentage + '%';
-    document.getElementById('expiredAt').textContent = couponData.expired_at;
-    document.getElementById('minPurchase').textContent = 'Rp ' + couponData.min_purchase;
+    document.getElementById('modal-discountPercentage').textContent = couponData.discount_percentage + '%';
+    document.getElementById('modal-expiredAt').textContent = couponData.expired_at;
+    document.getElementById('modal-minPurchase').textContent = 'Rp ' + couponData.min_purchase;
     
     var modal = new bootstrap.Modal(document.getElementById('couponModal'));
     modal.show();

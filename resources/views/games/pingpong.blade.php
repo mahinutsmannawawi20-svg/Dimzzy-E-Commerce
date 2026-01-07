@@ -282,11 +282,14 @@
     // ------------------ SAVE SCORE & COUPON ------------------
     function saveScore() {
         const playerName = prompt("Enter your name:") || "Guest";
-        const finalScore = score; // Use global variable 'score'
+        const finalScore = score; 
 
         // 1. UPDATE UI INSTANTLY (Score)
         const scoreDisplay = document.getElementById('finalScoreDisplay');
+        const statusDisplay = document.getElementById('system-status');
+
         if (scoreDisplay) scoreDisplay.textContent = finalScore;
+        if (statusDisplay) statusDisplay.textContent = "SENDING DATA...";
 
         const couponSection = document.getElementById('couponDataSection');
         const noCouponMsg = document.getElementById('noCouponMessage');
@@ -294,12 +297,6 @@
 
         // Scroll to footer immediately
         if (section) section.scrollIntoView({ behavior: 'smooth' });
-
-        // Show "Processing" state
-        if (noCouponMsg) {
-            noCouponMsg.classList.remove('d-none');
-            noCouponMsg.innerHTML = '<p class="text-info"><i class="fa-solid fa-spinner fa-spin"></i> Menyimpan skor...</p>';
-        }
 
         const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
 
@@ -317,10 +314,14 @@
         })
             .then(response => response.json())
             .then(data => {
+                // SYSTEM STATUS UPDATE
+                if (statusDisplay) statusDisplay.textContent = "SERVER RESPONSE OK";
+                if (statusDisplay) statusDisplay.style.color = "green";
+
                 if (data.coupon_generated && data.coupon) {
                     // WIN: Show Coupon Data
-                    if (couponSection) couponSection.classList.remove('d-none');
-                    if (noCouponMsg) noCouponMsg.classList.add('d-none'); 
+                    if (couponSection) couponSection.style.display = 'block';
+                    if (noCouponMsg) noCouponMsg.style.display = 'none';
 
                     // Fill Fields
                     document.getElementById('generatedCouponCode').textContent = data.coupon.code;
@@ -328,7 +329,7 @@
                     document.getElementById('modal-expiredAt').textContent = data.coupon.expired_at;
                     document.getElementById('modal-minPurchase').textContent = 'Rp ' + data.coupon.min_purchase;
                     
-                    // Copy Button Logic...
+                    // Copy Button Logic
                     const copyBtn = document.getElementById('copyCouponBtn');
                     if(copyBtn) {
                         copyBtn.onclick = function() {
@@ -344,9 +345,9 @@
 
                 } else {
                     // LOSE or LIMIT REACHED
-                    if (couponSection) couponSection.classList.add('d-none');
+                    if (couponSection) couponSection.style.display = 'none';
                     if (noCouponMsg) {
-                        noCouponMsg.classList.remove('d-none');
+                        noCouponMsg.style.display = 'block';
                         if (data.message) {
                             noCouponMsg.innerHTML = `<p class="text-warning fw-bold">${data.message}</p>`;
                         } else {
@@ -357,10 +358,14 @@
             })
             .catch(error => {
                 console.error('Error:', error);
+                if (statusDisplay) {
+                    statusDisplay.textContent = "ERROR: " + error.message;
+                    statusDisplay.style.color = "red";
+                }
                 if (noCouponMsg) {
+                   noCouponMsg.style.display = 'block';
                    noCouponMsg.innerHTML = `<p class="text-danger">Gagal menyimpan skor: ${error.message}. Coba refresh.</p>`;
                 }
-                alert('Error Saving Score: ' + error.message);
             });
     }
 </script>

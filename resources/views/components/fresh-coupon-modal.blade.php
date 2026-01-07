@@ -1,12 +1,17 @@
-<div id="couponResultSection" style="background: #fff; width: 100%; border-top: 5px solid #667eea; padding: 20px 0; margin-top: 20px; box-shadow: 0 -5px 20px rgba(0,0,0,0.1);">
+<div id="couponResultSection" style="background: #fff; width: 100%; border-top: 5px solid #667eea; padding: 20px 0; margin-top: 20px; box-shadow: 0 -5px 20px rgba(0,0,0,0.1); position: relative; z-index: 999;">
+    <!-- DEBUG INDICATOR: Remove after fix -->
+    <div style="text-align: center; background: #ffffcc; padding: 5px; font-size: 10px; color: #333;">
+        SYSTEM STATUS: <span id="system-status">READY</span>
+    </div>
+
     <div class="container text-center">
         <!-- Game Result Header -->
         <div style="background: #333; padding: 10px 20px; border-radius: 50px; color: white; display: inline-block; margin-bottom: 20px;">
-            <h4 class="mb-0" style="font-family: 'Poppins', sans-serif;">SKOR ANDA: <span id="finalScoreDisplay" style="color: #4fd1c5; font-weight: bold;">0</span></h4>
+            <h4 class="mb-0" style="font-family: 'Poppins', sans-serif;">SKOR TERAKHIR: <span id="finalScoreDisplay" style="color: #4fd1c5; font-weight: bold;">0</span></h4>
         </div>
 
-        <!-- Coupon Container (Initially Hidden via d-none, toggled by JS) -->
-        <div id="couponDataSection" class="d-none">
+        <!-- Coupon Container (Inline Style for Visibility Control) -->
+        <div id="couponDataSection" style="display: none;">
             <!-- Header -->
             <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 15px; border-radius: 15px; color: white; display: inline-block; min-width: 300px; margin-bottom: 20px;">
                 <h3 class="mb-0" style="font-weight: bold; font-family: 'Poppins', sans-serif;">🎉 CONGRATULATIONS! 🎉</h3>
@@ -56,8 +61,8 @@
             </div>
         </div>
 
-        <!-- No Coupon Message (Initially Hidden) -->
-        <div id="noCouponMessage" class="d-none mt-3">
+        <!-- No Coupon Message -->
+        <div id="noCouponMessage" style="display: none; margin-top: 15px;">
              <p class="text-muted">Kumpulkan skor minimal 1000 untuk mendapatkan kupon diskon!</p>
         </div>
     </div>

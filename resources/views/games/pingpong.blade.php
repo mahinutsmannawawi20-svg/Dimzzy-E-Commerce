@@ -301,30 +301,58 @@
         })
             .then(response => response.json())
             .then(data => {
-                // alert('DEBUG: Server Responded: ' + JSON.stringify(data)); 
-                
-                if (data.coupon_generated && data.coupon) {
-                    // Show Coupon Footer Section
-                    const section = document.getElementById('couponResultSection');
-                    
-                    if (section) {
-                        section.style.display = 'block';
-                        section.scrollIntoView({ behavior: 'smooth' });
-                         // Force removal of hidden class if bootstrap interferes
-                        section.classList.remove('d-none', 'hidden');
-                    } else {
-                        alert('ERROR: Footer Section ID Not Found!');
-                    }
-                    
-                    // Fill Data
-                    document.getElementById('generatedCouponCode').textContent = data.coupon.code;
-                    document.getElementById('modal-discountPercentage').textContent = data.coupon.discount_percentage + '%';
-                    document.getElementById('modal-expiredAt').textContent = data.coupon.expired_at;
-                    document.getElementById('modal-minPurchase').textContent = 'Rp ' + data.coupon.min_purchase;
+                // Determine Footer Elements
+                const section = document.getElementById('couponResultSection');
+                const scoreDisplay = document.getElementById('finalScoreDisplay');
+                const couponSection = document.getElementById('couponDataSection');
+                const noCouponMsg = document.getElementById('noCouponMessage');
 
-                } else if (data.message) {
-                    // Show message if coupon limit reached
-                    alert(data.message);
+                if (section) {
+                    // Update Score Display Always
+                    if (scoreDisplay) scoreDisplay.textContent = finalScore;
+                    
+                    // Logic: Win vs Lose
+                    if (data.coupon_generated && data.coupon) {
+                        // WIN: Show Coupon Data
+                        if (couponSection) couponSection.classList.remove('d-none');
+                        if (noCouponMsg) noCouponMsg.classList.add('d-none'); // Hide lose msg
+
+                        // Fill Data
+                        document.getElementById('generatedCouponCode').textContent = data.coupon.code;
+                        document.getElementById('modal-discountPercentage').textContent = data.coupon.discount_percentage + '%';
+                        document.getElementById('modal-expiredAt').textContent = data.coupon.expired_at;
+                        document.getElementById('modal-minPurchase').textContent = 'Rp ' + data.coupon.min_purchase;
+                        
+                        // Setup Copy Button
+                        const copyBtn = document.getElementById('copyCouponBtn');
+                        if(copyBtn) {
+                            copyBtn.onclick = function() {
+                                navigator.clipboard.writeText(data.coupon.code).then(function() {
+                                    var originalText = copyBtn.innerHTML;
+                                    copyBtn.innerHTML = '<i class="fa-solid fa-check"></i> Tersalin!';
+                                    setTimeout(function() {
+                                        copyBtn.innerHTML = originalText;
+                                    }, 2000);
+                                });
+                            };
+                        }
+
+                    } else {
+                        // LOSE (or Limit Reached): Hide Coupon Data
+                        if (couponSection) couponSection.classList.add('d-none');
+                        if (noCouponMsg) {
+                            noCouponMsg.classList.remove('d-none');
+                            // If limit reached message exists, maybe append it? 
+                            if (data.message) {
+                                noCouponMsg.innerHTML = `<p class="text-warning fw-bold">${data.message}</p>`;
+                            } else {
+                                noCouponMsg.innerHTML = '<p class="text-muted">Kumpulkan skor minimal 1000 untuk mendapatkan kupon diskon!</p>';
+                            }
+                        }
+                    }
+
+                    // Scroll to Footer so user sees the result
+                    section.scrollIntoView({ behavior: 'smooth' });
                 }
             })
             .catch(error => {

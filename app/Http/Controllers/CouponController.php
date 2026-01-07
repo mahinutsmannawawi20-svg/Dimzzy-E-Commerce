@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Coupon;
+use App\Helpers\CouponHelper;
 use Carbon\Carbon;
 
 class CouponController extends Controller
@@ -14,7 +15,6 @@ class CouponController extends Controller
     public function generate(Request $request)
     {
         $request->validate([
-            'player_name' => 'required|string|max:100',
             'game_type' => 'required|in:pingpong,snake',
             'score' => 'required|integer|min:1000',
         ]);
@@ -27,9 +27,10 @@ class CouponController extends Controller
             ], 400);
         }
 
-        // Check daily limit (max 3 coupons per day)
-        $todayCoupons = Coupon::forPlayer($request->player_name)
-                             ->today()
+        // Check daily limit (max 3 coupons per day per session)
+        $sessionCoupons = CouponHelper::getMyCoupons();
+        $todayCoupons = Coupon::whereIn('code', $sessionCoupons)
+                             ->whereDate('created_at', today())
                              ->count();
 
         if ($todayCoupons >= 3) {
@@ -48,13 +49,16 @@ class CouponController extends Controller
         // Create coupon
         $coupon = Coupon::create([
             'code' => $code,
-            'player_name' => $request->player_name,
+            'player_name' => 'Session User', // Default name for session users
             'game_type' => $request->game_type,
             'score' => $request->score,
             'discount_percentage' => $discountPercentage,
             'min_purchase' => 10000,
             'expired_at' => Carbon::now()->addDays(7),
         ]);
+
+        // Add coupon to session
+        CouponHelper::addCoupon($coupon->code);
 
         return response()->json([
             'success' => true,
@@ -69,13 +73,15 @@ class CouponController extends Controller
     }
 
     /**
-     * Display user's coupons
+     * Display user's coupons from session
      */
     public function myCoupons(Request $request)
     {
-        $playerName = $request->query('player_name', 'Guest');
+        // Get coupon codes from session
+        $couponCodes = CouponHelper::getMyCoupons();
         
-        $coupons = Coupon::forPlayer($playerName)
+        // Get actual coupon data from database
+        $coupons = Coupon::whereIn('code', $couponCodes)
                         ->orderBy('created_at', 'desc')
                         ->get();
 
@@ -83,7 +89,7 @@ class CouponController extends Controller
         $usedCoupons = $coupons->filter(fn($c) => $c->status === 'used');
         $expiredCoupons = $coupons->filter(fn($c) => $c->status === 'expired');
 
-        return view('coupons.index', compact('coupons', 'activeCoupons', 'usedCoupons', 'expiredCoupons', 'playerName'));
+        return view('coupons.index', compact('coupons', 'activeCoupons', 'usedCoupons', 'expiredCoupons'));
     }
 
     /**

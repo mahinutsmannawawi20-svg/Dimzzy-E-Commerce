@@ -281,7 +281,6 @@
 
     // ------------------ SAVE SCORE & COUPON ------------------
     function saveScore() {
-        const playerName = prompt("Enter your name:") || "Guest";
         const finalScore = score; 
 
         // 1. UPDATE UI INSTANTLY (Score)
@@ -305,7 +304,6 @@
                 'X-CSRF-TOKEN': csrfToken
             },
             body: JSON.stringify({
-                player_name: playerName,
                 score: finalScore,
                 game_type: 'pingpong'
             })

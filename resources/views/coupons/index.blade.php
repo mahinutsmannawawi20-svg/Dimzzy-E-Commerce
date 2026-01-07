@@ -103,7 +103,6 @@
             <div class="row">
                 <div class="col-sm-12">
                     <h1><i class="fa-solid fa-ticket"></i> Kupon <span class="clrchange">Saya</span></h1>
-                    <p class="text-muted">Player: {{ $playerName }}</p>
                 </div>
             </div>
 

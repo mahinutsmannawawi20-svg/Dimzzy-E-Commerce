@@ -59,7 +59,7 @@ class ScoreMinigameController extends Controller
                         'code' => $coupon->code,
                         'discount_percentage' => $coupon->discount_percentage,
                         'expired_at' => $coupon->expired_at->format('d M Y'),
-                        'min_purchase' => number_format($coupon->min_purchase, 0, ',', '.'),
+                        'min_purchase' => number_format((float)$coupon->min_purchase, 0, ',', '.'),
                     ];
                 } else {
                     $response['message'] = 'Kamu sudah mendapatkan 3 kupon hari ini! Coba lagi besok ya 😊';

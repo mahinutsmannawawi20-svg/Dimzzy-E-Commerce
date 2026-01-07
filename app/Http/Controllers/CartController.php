@@ -127,7 +127,7 @@ class CartController extends Controller
         if ($cartTotal < $coupon->min_purchase) {
             return response()->json([
                 'success' => false,
-                'message' => 'Minimal pembelian Rp ' . number_format($coupon->min_purchase, 0, ',', '.') . ' untuk menggunakan kupon ini!'
+                'message' => 'Minimal pembelian Rp ' . number_format((float)$coupon->min_purchase, 0, ',', '.') . ' untuk menggunakan kupon ini!'
             ], 400);
         }
 

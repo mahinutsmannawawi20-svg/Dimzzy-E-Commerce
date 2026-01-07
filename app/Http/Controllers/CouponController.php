@@ -63,7 +63,7 @@ class CouponController extends Controller
                 'code' => $coupon->code,
                 'discount_percentage' => $coupon->discount_percentage,
                 'expired_at' => $coupon->expired_at->format('d M Y'),
-                'min_purchase' => number_format($coupon->min_purchase, 0, ',', '.'),
+                'min_purchase' => number_format((float)$coupon->min_purchase, 0, ',', '.'),
             ]
         ]);
     }
@@ -122,7 +122,7 @@ class CouponController extends Controller
         if ($request->cart_total < $coupon->min_purchase) {
             return response()->json([
                 'success' => false,
-                'message' => 'Minimal pembelian Rp ' . number_format($coupon->min_purchase, 0, ',', '.') . ' untuk menggunakan kupon ini!'
+                'message' => 'Minimal pembelian Rp ' . number_format((float)$coupon->min_purchase, 0, ',', '.') . ' untuk menggunakan kupon ini!'
             ], 400);
         }
 

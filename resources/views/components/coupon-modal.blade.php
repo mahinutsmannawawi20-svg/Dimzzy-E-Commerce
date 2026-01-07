@@ -16,7 +16,7 @@
                 
                 <div class="coupon-code-box" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); padding: 20px; border-radius: 10px; margin: 20px 0;">
                     <p class="mb-2" style="color: white; font-size: 14px; font-weight: bold;">KODE KUPON</p>
-                    <h2 id="couponCode" style="color: white; font-weight: bold; letter-spacing: 2px; margin: 0;">-</h2>
+                    <h2 id="generatedCouponCode" style="color: white; font-weight: bold; letter-spacing: 2px; margin: 0;">-</h2>
                 </div>
 
                 <div class="discount-info" style="background: #f8f9fa; padding: 15px; border-radius: 10px; margin: 20px 0;">
@@ -64,7 +64,7 @@ function showCouponModal(couponData) {
         return;
     }
 
-    document.getElementById('couponCode').textContent = couponData.code;
+    document.getElementById('generatedCouponCode').textContent = couponData.code;
     document.getElementById('discountPercentage').textContent = couponData.discount_percentage + '%';
     document.getElementById('expiredAt').textContent = couponData.expired_at;
     document.getElementById('minPurchase').textContent = 'Rp ' + couponData.min_purchase;
@@ -75,7 +75,7 @@ function showCouponModal(couponData) {
 
 // Copy coupon code to clipboard
 document.getElementById('copyCouponBtn').addEventListener('click', function() {
-    var couponCode = document.getElementById('couponCode').textContent;
+    var couponCode = document.getElementById('generatedCouponCode').textContent;
     navigator.clipboard.writeText(couponCode).then(function() {
         var btn = document.getElementById('copyCouponBtn');
         var originalText = btn.innerHTML;

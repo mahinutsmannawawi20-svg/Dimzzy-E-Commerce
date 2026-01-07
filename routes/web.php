@@ -6,6 +6,7 @@ use App\Http\Controllers\CouponController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductsController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     $products = Products::all();

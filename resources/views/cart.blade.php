@@ -195,6 +195,25 @@
         </div>
     </section>
 
+    <!-- Delete Confirmation Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Konfirmasi Hapus</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Apakah Anda yakin ingin menghapus produk ini dari keranjang?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteBtn"><i class="fa-solid fa-trash"></i> Hapus</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <footer class="footer">
         <div class="row copy-right">
             <div class="col-sm-12">
@@ -236,20 +255,28 @@
             });
         }
 
-        function removeItem(productId) {
-            if (!confirm('Hapus produk ini dari keranjang?')) return;
+        let deleteProductId = null;
+        const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
 
-            $.ajax({
-                url: '/cart/remove/' + productId,
-                method: 'DELETE',
-                success: function(response) {
-                    location.reload();
-                },
-                error: function(xhr) {
-                    alert('Gagal menghapus produk');
-                }
-            });
+        function removeItem(productId) {
+            deleteProductId = productId;
+            deleteModal.show();
         }
+
+        document.getElementById('confirmDeleteBtn').addEventListener('click', function() {
+            if (deleteProductId) {
+                $.ajax({
+                    url: '/cart/remove/' + deleteProductId,
+                    method: 'DELETE',
+                    success: function(response) {
+                        location.reload();
+                    },
+                    error: function(xhr) {
+                        alert('Gagal menghapus produk');
+                    }
+                });
+            }
+        });
 
         function applyCoupon() {
             var code = $('#couponCode').val().trim();

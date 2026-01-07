@@ -341,11 +341,11 @@ section.section4 .col-sm-4 .innerproductsection .cartcontainer {
     position: relative;
     opacity: 0;
     bottom: 25px;
+    z-index: 10;
+    /* Ensure buttons are above image */
 }
 
-section.section4 .col-sm-4 .innerproductsection .cartcontainer button:nth-child(2) i {
-    display: none;
-}
+
 
 section.section4 .col-sm-4 .innerproductsection h2 {
     text-align: center;
@@ -386,7 +386,7 @@ section.section4 .col-sm-4 .innerproductsection .cartcontainer button:hover {
 
 section.section4 .col-sm-4:hover .innerproductsection img {
     transform: scale(1.1);
-    z-index: -1;
+    /* z-index: -1; Removed to prevent clicking issues */
     position: relative;
 }
 
@@ -797,266 +797,276 @@ section.section4 .container .row:nth-child(1) h1 span {
         font-size: 17px;
         padding: 16px;
     }
+}
 
-    header .container .row .navbar {
-        margin-top: 68px;
-    }
-
-    header .container .row .navbar div#navbarNav .navbar-nav:nth-child(1) li a {
-        font-size: 18px;
-    }
-
-    header .container .row .navbar div#navbarNav .navbar-nav:nth-child(2) li a {
-        font-size: 21px;
-    }
-
-    header .container .row .navbar h1.logo {
-        font-size: 30px;
-    }
-
-    section.section1 {
-        margin-top: 155px;
-        height: 500px;
-    }
-
-    section.section1 h1 {
-        font-size: 45px !important;
-    }
-
-    section.section1 h2 {
-        font-size: 27px !important;
-    }
-
-    section.section1 p {
-        font-size: 16px;
-    }
-
-    section.section1 a.links {
-        font-size: 17px;
-        margin-top: 20px;
-    }
-
-    .topbtn a i {
-        font-size: 25px;
-        height: 60px;
-        width: 60px;
-    }
-
-    .section2 h1 {
-        font-size: 35px;
-        padding: 7px 0px;
-        margin-bottom: 45px;
-    }
-
-    .section2 .col-sm-6:nth-child(2) h2 {
-        font-size: 29px;
-    }
-
-    .section2 .col-sm-6:nth-child(2) p {
-        font-size: 16px;
-    }
-
-    .section2 .col-sm-6:nth-child(2) a {
-        font-size: 17px;
-        padding: 12px 35px;
-        width: 38%;
-        display: flex;
-        justify-content: center;
-    }
-
-    .section2 .col-sm-6:nth-child(1) .clrchangeback h3 {
-        font-size: 25px;
-    }
-
-    .section2 .col-sm-6:nth-child(2) p:nth-child(3) {
-        margin-bottom: 25px;
-    }
-
-    section.section3 .innercol .txtcol h4 {
-        font-size: 18px;
-    }
-
-    section.section3 .innercol .txtcol p {
-        font-size: 13px;
-    }
-
-    section.section3 .innercol {
-        padding: 10px 15px;
-    }
-
-    section.section3 .innercol .txtwithicon .iconcol {
-        font-size: 35px;
-        margin-right: 15px;
-    }
-
-    section.section3 {
-        padding: 45px 0px !important;
-    }
-
-    section.section4 .container .row:nth-child(1) h1 {
-        font-size: 35px;
-        padding: 7px 0px;
-        margin-bottom: 40px;
-    }
-
-    section.section4 .col-sm-4 .innerproductsection span.discount {
-        font-size: 17px;
-        left: 13px;
-        top: 10px;
-        padding: 4px 10px;
-    }
-
-    section.section4 .col-sm-4 .innerproductsection img {
-        height: 170px;
-    }
-
-    section.section4 .col-sm-4 .innerproductsection {
-        padding: 20px 0px 10px 0px;
-    }
-
-    section.section4 .col-sm-4 .innerproductsection h2 {
-        font-size: 22px;
-        margin-top: -20px;
-        margin-bottom: 7px;
-    }
-
-    section.section4 .col-sm-4 .innerproductsection h1.price span {
-        font-size: 22px;
-        margin-right: 0px;
-    }
-
-    section.section4 .col-sm-4 .innerproductsection h1.price del {
-        font-size: 15px !important;
-    }
-
-    section.section4 .col-sm-4 .innerproductsection .cartcontainer button {
-        font-size: 15px;
-        height: 39px;
-    }
-
-    section.section4 .col-sm-4:hover .innerproductsection .cartcontainer {
-        bottom: 33px;
-    }
-
-    section.section4 {
-        padding: 40px 0px 15px 0px;
-    }
-
-    .section5 h1.mainheading {
-        font-size: 35px;
-        padding: 7px 0px;
-        margin-bottom: 25px;
-    }
-
-    section.section5 .container .row .owl-carousel .reviewinner ul li i {
-        font-size: 17px;
-    }
-
-    section.section5 .container .row .owl-carousel .reviewinner p {
-        font-size: 13px;
-        margin-top: 10px;
-    }
-
-    section.section5 .container .row .owl-carousel .reviewinner {
-        padding: 20px 20px 1px 20px;
-    }
-
-    section.section5 .container .row .owl-carousel .txtwithicon .iconcol img {
-        width: 57%;
-    }
-
-    section.section5 .container .row .owl-carousel .txtwithicon .iconcol {
-        margin-right: -28px;
-    }
-
-    section.section5 .container .row .owl-carousel .txtwithicon .txtcol h1 {
-        font-size: 18px;
-    }
-
-    section.section5 .container .row .owl-carousel .txtwithicon:before {
-        font-size: 55px;
-        top: 0px;
-        bottom: 0px;
-        margin: auto 0px !important;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    section.section5 .container .row .owl-carousel .txtwithicon {
-        margin-top: -17px;
-    }
-
-    .section5 .owl-carousel button i {
-        font-size: 20px;
-        padding: 15px;
-    }
-
-    section.section5 {
-        padding-bottom: 0px;
-    }
-
-    .section6 h1.mainheading {
-        font-size: 35px;
-        padding: 7px 0px;
-        margin-bottom: 30px;
-    }
-
-    section.section6 {
-        padding-top: 20px;
-    }
-
-    .section6 .col-sm-6:nth-child(1) form input {
-        font-size: 13px;
-        padding: 9px 10px;
-    }
-
-    .section6 .col-sm-6:nth-child(1) form textarea {
-        font-size: 13px;
-        padding: 9px 10px;
-        height: 110px;
-    }
-
-    .section6 .col-sm-6:nth-child(1) form button.links {
-        font-size: 15px;
-    }
-
-    .section6 .col-sm-6:nth-child(2) img {
-        height: 415px;
-        width: 100%;
-        object-fit: contain;
-    }
-
-    footer.footer {
-        padding: 10px 0px 5px 0px;
-    }
-
-    footer.footer h3.footerheadings {
-        font-size: 21px;
-        margin-bottom: 0px;
-    }
-
-    footer.footer ul li a {
-        font-size: 15px;
-    }
-
-    footer.footer ul li {
-        margin: 5px 0px;
-    }
-
-    footer.footer ul {
-        margin-top: 15px;
-    }
-
-    footer.footer .row.copy-right p {
-        font-size: 15px;
-        margin-bottom: 12px;
-    }
-
-    footer.footer .row.copy-right {
-        padding-top: 20px;
+/* Specific Mobile Fix for Product Buttons */
+@media only screen and (max-width: 991px) {
+    section.section4 .col-sm-4 .innerproductsection .cartcontainer {
+        opacity: 1 !important;
+        bottom: 25px !important;
+        /* Keep consistent position */
     }
 }
+
+header .container .row .navbar {
+    margin-top: 68px;
+}
+
+header .container .row .navbar div#navbarNav .navbar-nav:nth-child(1) li a {
+    font-size: 18px;
+}
+
+header .container .row .navbar div#navbarNav .navbar-nav:nth-child(2) li a {
+    font-size: 21px;
+}
+
+header .container .row .navbar h1.logo {
+    font-size: 30px;
+}
+
+section.section1 {
+    margin-top: 155px;
+    height: 500px;
+}
+
+section.section1 h1 {
+    font-size: 45px !important;
+}
+
+section.section1 h2 {
+    font-size: 27px !important;
+}
+
+section.section1 p {
+    font-size: 16px;
+}
+
+section.section1 a.links {
+    font-size: 17px;
+    margin-top: 20px;
+}
+
+.topbtn a i {
+    font-size: 25px;
+    height: 60px;
+    width: 60px;
+}
+
+.section2 h1 {
+    font-size: 35px;
+    padding: 7px 0px;
+    margin-bottom: 45px;
+}
+
+.section2 .col-sm-6:nth-child(2) h2 {
+    font-size: 29px;
+}
+
+.section2 .col-sm-6:nth-child(2) p {
+    font-size: 16px;
+}
+
+.section2 .col-sm-6:nth-child(2) a {
+    font-size: 17px;
+    padding: 12px 35px;
+    width: 38%;
+    display: flex;
+    justify-content: center;
+}
+
+.section2 .col-sm-6:nth-child(1) .clrchangeback h3 {
+    font-size: 25px;
+}
+
+.section2 .col-sm-6:nth-child(2) p:nth-child(3) {
+    margin-bottom: 25px;
+}
+
+section.section3 .innercol .txtcol h4 {
+    font-size: 18px;
+}
+
+section.section3 .innercol .txtcol p {
+    font-size: 13px;
+}
+
+section.section3 .innercol {
+    padding: 10px 15px;
+}
+
+section.section3 .innercol .txtwithicon .iconcol {
+    font-size: 35px;
+    margin-right: 15px;
+}
+
+section.section3 {
+    padding: 45px 0px !important;
+}
+
+section.section4 .container .row:nth-child(1) h1 {
+    font-size: 35px;
+    padding: 7px 0px;
+    margin-bottom: 40px;
+}
+
+section.section4 .col-sm-4 .innerproductsection span.discount {
+    font-size: 17px;
+    left: 13px;
+    top: 10px;
+    padding: 4px 10px;
+}
+
+section.section4 .col-sm-4 .innerproductsection img {
+    height: 170px;
+}
+
+section.section4 .col-sm-4 .innerproductsection {
+    padding: 20px 0px 10px 0px;
+}
+
+section.section4 .col-sm-4 .innerproductsection h2 {
+    font-size: 22px;
+    margin-top: -20px;
+    margin-bottom: 7px;
+}
+
+section.section4 .col-sm-4 .innerproductsection h1.price span {
+    font-size: 22px;
+    margin-right: 0px;
+}
+
+section.section4 .col-sm-4 .innerproductsection h1.price del {
+    font-size: 15px !important;
+}
+
+section.section4 .col-sm-4 .innerproductsection .cartcontainer button {
+    font-size: 15px;
+    height: 39px;
+}
+
+section.section4 .col-sm-4:hover .innerproductsection .cartcontainer {
+    bottom: 33px;
+}
+
+section.section4 {
+    padding: 40px 0px 15px 0px;
+}
+
+.section5 h1.mainheading {
+    font-size: 35px;
+    padding: 7px 0px;
+    margin-bottom: 25px;
+}
+
+section.section5 .container .row .owl-carousel .reviewinner ul li i {
+    font-size: 17px;
+}
+
+section.section5 .container .row .owl-carousel .reviewinner p {
+    font-size: 13px;
+    margin-top: 10px;
+}
+
+section.section5 .container .row .owl-carousel .reviewinner {
+    padding: 20px 20px 1px 20px;
+}
+
+section.section5 .container .row .owl-carousel .txtwithicon .iconcol img {
+    width: 57%;
+}
+
+section.section5 .container .row .owl-carousel .txtwithicon .iconcol {
+    margin-right: -28px;
+}
+
+section.section5 .container .row .owl-carousel .txtwithicon .txtcol h1 {
+    font-size: 18px;
+}
+
+section.section5 .container .row .owl-carousel .txtwithicon:before {
+    font-size: 55px;
+    top: 0px;
+    bottom: 0px;
+    margin: auto 0px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+section.section5 .container .row .owl-carousel .txtwithicon {
+    margin-top: -17px;
+}
+
+.section5 .owl-carousel button i {
+    font-size: 20px;
+    padding: 15px;
+}
+
+section.section5 {
+    padding-bottom: 0px;
+}
+
+.section6 h1.mainheading {
+    font-size: 35px;
+    padding: 7px 0px;
+    margin-bottom: 30px;
+}
+
+section.section6 {
+    padding-top: 20px;
+}
+
+.section6 .col-sm-6:nth-child(1) form input {
+    font-size: 13px;
+    padding: 9px 10px;
+}
+
+.section6 .col-sm-6:nth-child(1) form textarea {
+    font-size: 13px;
+    padding: 9px 10px;
+    height: 110px;
+}
+
+.section6 .col-sm-6:nth-child(1) form button.links {
+    font-size: 15px;
+}
+
+.section6 .col-sm-6:nth-child(2) img {
+    height: 415px;
+    width: 100%;
+    object-fit: contain;
+}
+
+footer.footer {
+    padding: 10px 0px 5px 0px;
+}
+
+footer.footer h3.footerheadings {
+    font-size: 21px;
+    margin-bottom: 0px;
+}
+
+footer.footer ul li a {
+    font-size: 15px;
+}
+
+footer.footer ul li {
+    margin: 5px 0px;
+}
+
+footer.footer ul {
+    margin-top: 15px;
+}
+
+footer.footer .row.copy-right p {
+    font-size: 15px;
+    margin-bottom: 12px;
+}
+
+footer.footer .row.copy-right {
+    padding-top: 20px;
+}
+
 
 @media only screen and (min-width: 768px) and (max-width: 1000px) {
     marquee.marque {
@@ -1399,7 +1409,7 @@ section.section4 .container .row:nth-child(1) h1 span {
     }
 }
 
-@media only screen and (min-width: 320px) and (max-width: 767px){
+@media only screen and (min-width: 320px) and (max-width: 767px) {
 
     marquee.marque {
         font-size: 15px;
@@ -1753,114 +1763,118 @@ section.section4 .container .row:nth-child(1) h1 span {
     }
 
     .show {
-    height: 100vh;
-    text-align: center;
-    }    
+        height: 100vh;
+        text-align: center;
+    }
 
 
-.topbtn {
-    right: 15px;
-    bottom: 15px;
-    z-index: 1;
-}
+    .topbtn {
+        right: 15px;
+        bottom: 15px;
+        z-index: 1;
+    }
 
-header .container .row .navbar-light .navbar-toggler:focus-visible {
-    outline: none;
-}
+    header .container .row .navbar-light .navbar-toggler:focus-visible {
+        outline: none;
+    }
 
-section.section1:before {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: #000000a3;
-}
+    section.section1:before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: #000000a3;
+    }
 
-section.section1 * {
-    z-index: 1;
-    position: relative;
-}
+    section.section1 * {
+        z-index: 1;
+        position: relative;
+    }
 
-.section2 .row:nth-child(2) .col-sm-6:nth-child(2) {margin: 25px 0px 0px 0px;text-align: center;padding: 0px 20px;}
+    .section2 .row:nth-child(2) .col-sm-6:nth-child(2) {
+        margin: 25px 0px 0px 0px;
+        text-align: center;
+        padding: 0px 20px;
+    }
 
-.section2 .row:nth-child(2) .col-sm-6:nth-child(2) a {
-    width: 100%;
-    margin: 25px 0px 0px 0px;
-}
+    .section2 .row:nth-child(2) .col-sm-6:nth-child(2) a {
+        width: 100%;
+        margin: 25px 0px 0px 0px;
+    }
 
-section.section5 .container .row .owl-carousel .reviewinner ul {
-    justify-content: center;
-}
+    section.section5 .container .row .owl-carousel .reviewinner ul {
+        justify-content: center;
+    }
 
-.txtcol {
-    text-align: center;
-    margin-top: 4px;
-}
+    .txtcol {
+        text-align: center;
+        margin-top: 4px;
+    }
 
-section.section5 .container .row .owl-carousel .txtwithicon .txtcol p {
-    margin: 0px;
-    text-align: center;
-    margin-top: 5px;
-}
+    section.section5 .container .row .owl-carousel .txtwithicon .txtcol p {
+        margin: 0px;
+        text-align: center;
+        margin-top: 5px;
+    }
 
-.section5 button.owl-next {
-    right: 0px;
-}
+    .section5 button.owl-next {
+        right: 0px;
+    }
 
-.section5 button.owl-prev {
-    left: 0px;
-}
+    .section5 button.owl-prev {
+        left: 0px;
+    }
 
-section.section6 .row:nth-child(2) {
-    display: flex;
-    flex-direction: column-reverse;
-}
+    section.section6 .row:nth-child(2) {
+        display: flex;
+        flex-direction: column-reverse;
+    }
 
-section.section6 .row:nth-child(2) img {
-    width: 85%;
-    margin: 0 auto;
-}
+    section.section6 .row:nth-child(2) img {
+        width: 85%;
+        margin: 0 auto;
+    }
 
-footer.footer * {
-    text-align: center;
-}
+    footer.footer * {
+        text-align: center;
+    }
 
-footer.footer h3 {
-    margin-top: 15px;
-}
+    footer.footer h3 {
+        margin-top: 15px;
+    }
 
-.show:focus-visible {outline: none;}
+    .show:focus-visible {
+        outline: none;
+    }
 
-header .container .row .navbar::-webkit-scrollbar-track
-{
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	background-color: #F5F5F5;
-}
+    header .container .row .navbar::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        background-color: #F5F5F5;
+    }
 
-header .container .row .navbar::-webkit-scrollbar
-{
-	width: 3px;
-	background-color: #F5F5F5;
-}
+    header .container .row .navbar::-webkit-scrollbar {
+        width: 3px;
+        background-color: #F5F5F5;
+    }
 
-header .container .row .navbar::-webkit-scrollbar-thumb
-{
-	background-color: #E30613;
-}
+    header .container .row .navbar::-webkit-scrollbar-thumb {
+        background-color: #E30613;
+    }
 
 
-.show + .navbar {
-    height: 100vh;
-    overflow-y: scroll;
-}
+    .show+.navbar {
+        height: 100vh;
+        overflow-y: scroll;
+    }
 
-.navbar-light .navbar-toggler-icon:focus-within,.navbar-light .navbar-toggler-icon:focus-visible {
-    outline: none !important;
-}
+    .navbar-light .navbar-toggler-icon:focus-within,
+    .navbar-light .navbar-toggler-icon:focus-visible {
+        outline: none !important;
+    }
 
-header .container .row .navbar-light .navbar-toggler:focus {
-    box-shadow: none;
-}
+    header .container .row .navbar-light .navbar-toggler:focus {
+        box-shadow: none;
+    }
 }
 
 
@@ -1995,37 +2009,46 @@ header .container .row .navbar-light .navbar-toggler:focus {
         padding: 7px 0px;
         margin-bottom: 40px;
     }
+
     .product-section .col-sm-4 .innerproductsection span.discount {
         font-size: 17px;
         left: 13px;
         top: 10px;
         padding: 4px 10px;
     }
+
     .product-section .col-sm-4 .innerproductsection img {
         height: 170px;
     }
+
     .product-section .col-sm-4 .innerproductsection {
         padding: 20px 0px 10px 0px;
     }
+
     .product-section .col-sm-4 .innerproductsection h2 {
         font-size: 22px;
         margin-top: -20px;
         margin-bottom: 7px;
     }
+
     .product-section .col-sm-4 .innerproductsection h1.price span {
         font-size: 22px;
         margin-right: 0px;
     }
+
     .product-section .col-sm-4 .innerproductsection h1.price del {
         font-size: 15px !important;
     }
+
     .product-section .col-sm-4 .innerproductsection .cartcontainer button {
         font-size: 15px;
         height: 39px;
     }
+
     .product-section .col-sm-4:hover .innerproductsection .cartcontainer {
         bottom: 33px;
     }
+
     .product-section {
         padding: 40px 0px 15px 0px;
     }
@@ -2037,79 +2060,97 @@ header .container .row .navbar-light .navbar-toggler:focus {
         padding: 7px 0px;
         margin-bottom: 23px;
     }
+
     .product-section .col-sm-4 .innerproductsection span.discount {
         font-size: 17px;
         left: 13px;
         top: 10px;
         padding: 4px 10px;
     }
+
     .product-section .col-sm-4 .innerproductsection img {
         height: 140px;
     }
+
     .product-section .col-sm-4 .innerproductsection {
         padding: 20px 0px 10px 0px;
     }
+
     .product-section .col-sm-4 .innerproductsection h2 {
         font-size: 21px;
         margin-top: -15px;
         margin-bottom: 5px;
     }
+
     .product-section .col-sm-4 .innerproductsection h1.price span {
         font-size: 21px;
         margin-right: 0px;
     }
+
     .product-section .col-sm-4 .innerproductsection h1.price del {
         font-size: 14px !important;
     }
+
     .product-section .col-sm-4 .innerproductsection .cartcontainer button {
         font-size: 14px;
         height: 39px;
     }
+
     .product-section .col-sm-4:hover .innerproductsection .cartcontainer {
         bottom: 33px;
     }
+
     .product-section {
         padding: 28px 0px 15px 0px;
     }
 }
 
-@media only screen and (min-width: 320px) and (max-width: 767px){
+@media only screen and (min-width: 320px) and (max-width: 767px) {
     .product-section .container .row:nth-child(1) h1 {
         font-size: 30px;
         padding: 7px 0px;
         margin-bottom: 23px;
     }
+
     .product-section .col-sm-4 .innerproductsection span.discount {
         font-size: 17px;
         left: 13px;
         top: 10px;
         padding: 4px 10px;
     }
+
     .product-section .col-sm-4 .innerproductsection img {
         height: 140px;
     }
+
     .product-section .col-sm-4 .innerproductsection {
         padding: 20px 0px 10px 0px;
     }
+
     .product-section .col-sm-4 .innerproductsection h2 {
         font-size: 21px;
         margin-top: -15px;
         margin-bottom: 5px;
     }
+
     .product-section .col-sm-4 .innerproductsection h1.price span {
         font-size: 21px;
         margin-right: 0px;
     }
+
     .product-section .col-sm-4 .innerproductsection h1.price del {
         font-size: 14px !important;
     }
+
     .product-section .col-sm-4 .innerproductsection .cartcontainer button {
         font-size: 14px;
         height: 39px;
     }
+
     .product-section .col-sm-4:hover .innerproductsection .cartcontainer {
         bottom: 33px;
     }
+
     .product-section {
         padding: 28px 0px 0px 0px;
     }

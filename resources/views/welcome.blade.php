@@ -60,13 +60,16 @@
 
                                 <ul class="navbar-nav ml-auto">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#"><i class="fa-solid fa-heart"></i></a>
+                                        <a class="nav-link" href="#" onclick="alert('Fitur Wishlist segera hadir! 💖')"><i class="fa-solid fa-heart"></i></a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+                                        <a class="nav-link" href="{{ route('cart.index') }}">
+                                            <i class="fa-solid fa-cart-shopping"></i>
+                                            <span class="badge bg-danger" id="cartCount" style="font-size: 10px; vertical-align: super;">0</span>
+                                        </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#"><i class="fa-solid fa-user"></i></a>
+                                        <a class="nav-link" href="{{ route('coupons.index') }}"><i class="fa-solid fa-user"></i></a>
                                     </li>
 
                                 </ul>
@@ -86,7 +89,7 @@
                     <h1>Dimsum + Keju = Dimzzy!</h1>
                     <h2>Goreng, Leleh, Mantap!</h2>
                     <p>Dimsum goreng keju yang renyah di luar, meleleh di dalam. Pesan sekarang dan rasakan kenikmatannya!</p>
-                    <a href="#" class="links">Beli Sekarang</a>
+                    <a href="#product" class="links">Beli Sekarang</a>
                 </div>
             </div>
         </div>
@@ -105,7 +108,7 @@
                 <div class="col-sm-6" data-aos="fade-left">
                     <h2>Kenapa Harus Cobain Dimzzy</h2>
                     <p>Di Dimzzy, kami menyajikan dimsum goreng keju yang lezat dan menggoda. Dari kampus untuk kampus, setiap gigitan penuh rasa dan keju meleleh yang bikin nagih.</p>
-                    <a href="#" class="links">Learn More</a>
+                    <a href="#about" class="links">Learn More</a>
                 </div>
             </div>
         </div>
@@ -124,9 +127,9 @@
                     <div class="innerproductsection">
                         <img src="{{ asset($product->foto) }}" alt="{{ $product->nama_produk }}" style="height: 250px; object-fit: cover;" />
                         <div class="cartcontainer">
-                            <button class="wishlist"><i class="fa-solid fa-heart"></i></button>
-                            <button class="btn" onclick="addToCart({{ $product->id }})">Tambah ke Keranjang <i class="fa-solid fa-cart-plus"></i></button>
-                            <button class="share"><i class="fa-solid fa-share"></i></button>
+                            <button class="wishlist" onclick="alert('Fitur Wishlist segera hadir! 💖')"><i class="fa-solid fa-heart"></i></button>
+                            <button class="btn" onclick="addToCart({{ $product->id }})"><i class="fa-solid fa-cart-shopping"></i></button>
+                            <button class="share" onclick="alert('Fitur Share segera hadir! 🔗')"><i class="fa-solid fa-share"></i></button>
                         </div>
 
                         <h2>{{ $product->nama_produk }}</h2>
@@ -316,25 +319,7 @@
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
     
-    <!-- Custom CSS to Fix Mobile Buttons -->
-    <style>
-        /* Force Buttons to be Top Layer */
-        .cartcontainer {
-            z-index: 1000 !important;
-            position: relative;
-        }
-        .innerproductsection {
-            z-index: 1; /* Establish stacking context */
-        }
-        
-        /* On Mobile, keep buttons visible */
-        @media (max-width: 768px) {
-            section.section4 .col-sm-4 .innerproductsection .cartcontainer {
-                opacity: 1 !important;
-                bottom: 10px !important;
-            }
-        }
-    </style>
+
     
     <script>
         // Setup CSRF token for all AJAX requests
@@ -356,8 +341,10 @@
                 success: function(response) {
                     if (response.success) {
                         alert('Produk berhasil ditambahkan ke keranjang! 🛒');
-                        // Optional: Update cart badge if you have one
-                        // $('#cartCount').text(response.cart_count);
+                        // Update cart badge
+                        if (response.cart_count) {
+                            $('#cartCount').text(response.cart_count);
+                        }
                     } else {
                         alert('Gagal: ' + response.message);
                     }

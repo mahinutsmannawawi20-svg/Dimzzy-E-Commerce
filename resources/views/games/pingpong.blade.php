@@ -281,9 +281,25 @@
 
     // ------------------ SAVE SCORE & COUPON ------------------
     function saveScore() {
-        // alert('DEBUG: Sending Score...'); // Uncomment for extreme debug
         const playerName = prompt("Enter your name:") || "Guest";
-        const finalScore = score;
+        const finalScore = score; // Use global variable 'score'
+
+        // 1. UPDATE UI INSTANTLY (Score)
+        const scoreDisplay = document.getElementById('finalScoreDisplay');
+        if (scoreDisplay) scoreDisplay.textContent = finalScore;
+
+        const couponSection = document.getElementById('couponDataSection');
+        const noCouponMsg = document.getElementById('noCouponMessage');
+        const section = document.getElementById('couponResultSection');
+
+        // Scroll to footer immediately
+        if (section) section.scrollIntoView({ behavior: 'smooth' });
+
+        // Show "Processing" state
+        if (noCouponMsg) {
+            noCouponMsg.classList.remove('d-none');
+            noCouponMsg.innerHTML = '<p class="text-info"><i class="fa-solid fa-spinner fa-spin"></i> Menyimpan skor...</p>';
+        }
 
         const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
 
@@ -301,62 +317,49 @@
         })
             .then(response => response.json())
             .then(data => {
-                // Determine Footer Elements
-                const section = document.getElementById('couponResultSection');
-                const scoreDisplay = document.getElementById('finalScoreDisplay');
-                const couponSection = document.getElementById('couponDataSection');
-                const noCouponMsg = document.getElementById('noCouponMessage');
+                if (data.coupon_generated && data.coupon) {
+                    // WIN: Show Coupon Data
+                    if (couponSection) couponSection.classList.remove('d-none');
+                    if (noCouponMsg) noCouponMsg.classList.add('d-none'); 
 
-                if (section) {
-                    // Update Score Display Always
-                    if (scoreDisplay) scoreDisplay.textContent = finalScore;
+                    // Fill Fields
+                    document.getElementById('generatedCouponCode').textContent = data.coupon.code;
+                    document.getElementById('modal-discountPercentage').textContent = data.coupon.discount_percentage + '%';
+                    document.getElementById('modal-expiredAt').textContent = data.coupon.expired_at;
+                    document.getElementById('modal-minPurchase').textContent = 'Rp ' + data.coupon.min_purchase;
                     
-                    // Logic: Win vs Lose
-                    if (data.coupon_generated && data.coupon) {
-                        // WIN: Show Coupon Data
-                        if (couponSection) couponSection.classList.remove('d-none');
-                        if (noCouponMsg) noCouponMsg.classList.add('d-none'); // Hide lose msg
-
-                        // Fill Data
-                        document.getElementById('generatedCouponCode').textContent = data.coupon.code;
-                        document.getElementById('modal-discountPercentage').textContent = data.coupon.discount_percentage + '%';
-                        document.getElementById('modal-expiredAt').textContent = data.coupon.expired_at;
-                        document.getElementById('modal-minPurchase').textContent = 'Rp ' + data.coupon.min_purchase;
-                        
-                        // Setup Copy Button
-                        const copyBtn = document.getElementById('copyCouponBtn');
-                        if(copyBtn) {
-                            copyBtn.onclick = function() {
-                                navigator.clipboard.writeText(data.coupon.code).then(function() {
-                                    var originalText = copyBtn.innerHTML;
-                                    copyBtn.innerHTML = '<i class="fa-solid fa-check"></i> Tersalin!';
-                                    setTimeout(function() {
-                                        copyBtn.innerHTML = originalText;
-                                    }, 2000);
-                                });
-                            };
-                        }
-
-                    } else {
-                        // LOSE (or Limit Reached): Hide Coupon Data
-                        if (couponSection) couponSection.classList.add('d-none');
-                        if (noCouponMsg) {
-                            noCouponMsg.classList.remove('d-none');
-                            // If limit reached message exists, maybe append it? 
-                            if (data.message) {
-                                noCouponMsg.innerHTML = `<p class="text-warning fw-bold">${data.message}</p>`;
-                            } else {
-                                noCouponMsg.innerHTML = '<p class="text-muted">Kumpulkan skor minimal 1000 untuk mendapatkan kupon diskon!</p>';
-                            }
-                        }
+                    // Copy Button Logic...
+                    const copyBtn = document.getElementById('copyCouponBtn');
+                    if(copyBtn) {
+                        copyBtn.onclick = function() {
+                            navigator.clipboard.writeText(data.coupon.code).then(function() {
+                                var originalText = copyBtn.innerHTML;
+                                copyBtn.innerHTML = '<i class="fa-solid fa-check"></i> Tersalin!';
+                                setTimeout(function() {
+                                    copyBtn.innerHTML = originalText;
+                                }, 2000);
+                            });
+                        };
                     }
 
-                    // Scroll to Footer so user sees the result
-                    section.scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    // LOSE or LIMIT REACHED
+                    if (couponSection) couponSection.classList.add('d-none');
+                    if (noCouponMsg) {
+                        noCouponMsg.classList.remove('d-none');
+                        if (data.message) {
+                            noCouponMsg.innerHTML = `<p class="text-warning fw-bold">${data.message}</p>`;
+                        } else {
+                            noCouponMsg.innerHTML = '<p class="text-muted">Kumpulkan skor minimal 1000 untuk mendapatkan kupon diskon!</p>';
+                        }
+                    }
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
+                if (noCouponMsg) {
+                   noCouponMsg.innerHTML = `<p class="text-danger">Gagal menyimpan skor: ${error.message}. Coba refresh.</p>`;
+                }
                 alert('Error Saving Score: ' + error.message);
             });
     }

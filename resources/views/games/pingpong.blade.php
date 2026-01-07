@@ -17,6 +17,8 @@
 <!-- Include Coupon Modal -->
 @include('components.fresh-coupon-modal')
 
+@endsection
+
 @section('scripts')
 <script>
     const canvas = document.getElementById("gameCanvas");
@@ -347,5 +349,4 @@
             });
     }
 </script>
-@endsection
 @endsection

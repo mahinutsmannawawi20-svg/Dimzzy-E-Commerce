@@ -52,3 +52,31 @@ Route::get('/payment/success/{orderId}', [PaymentController::class, 'success'])-
 Route::get('/payment/failed', [PaymentController::class, 'failed'])->name('payment.failed');
 
 Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
+
+// Admin Routes
+use App\Http\Controllers\Admin\AdminAuthController;
+use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\AdminProductController;
+use App\Http\Controllers\Admin\AdminOrderController;
+use App\Http\Controllers\Admin\AdminCouponController;
+
+Route::prefix('admin')->group(function () {
+    Route::get('/login', [AdminAuthController::class, 'showLogin'])->name('admin.login');
+    Route::post('/login', [AdminAuthController::class, 'login']);
+    Route::post('/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
+    
+    Route::middleware('admin')->group(function () {
+        Route::get('/', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+        
+        // Products
+        Route::resource('products', AdminProductController::class)->names('admin.products');
+        
+        // Orders
+        Route::get('/orders', [AdminOrderController::class, 'index'])->name('admin.orders.index');
+        Route::get('/orders/{order}', [AdminOrderController::class, 'show'])->name('admin.orders.show');
+        Route::put('/orders/{order}', [AdminOrderController::class, 'update'])->name('admin.orders.update');
+        
+        // Coupons
+        Route::resource('coupons', AdminCouponController::class)->names('admin.coupons');
+    });
+});

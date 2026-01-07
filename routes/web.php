@@ -1,6 +1,11 @@
 <?php
 
 use App\Models\Products;
+use App\Http\Controllers\ScoreMinigameController;
+use App\Http\Controllers\CouponController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ProductsController;
 
 Route::get('/', function () {
     $products = Products::all();

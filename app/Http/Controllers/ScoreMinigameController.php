@@ -68,11 +68,11 @@ class ScoreMinigameController extends Controller
 
             return response()->json($response);
 
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             \Illuminate\Support\Facades\Log::error('Coupon Gen Error: ' . $e->getMessage());
             return response()->json([
                 'success' => false,
-                'message' => 'Gagal memproses skor: ' . $e->getMessage()
+                'message' => 'SYSTEM ERROR: ' . $e->getMessage() . ' on line ' . $e->getLine()
             ], 500);
         }
     }

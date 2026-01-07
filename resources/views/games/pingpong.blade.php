@@ -15,7 +15,7 @@
 </div>
 
 <!-- Include Coupon Modal -->
-@include('components.coupon-modal')
+@include('components.fresh-coupon-modal')
 
 @vite('resources/js/pingpong.js')
 @endsection

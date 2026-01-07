@@ -281,10 +281,10 @@
 
     // ------------------ SAVE SCORE & COUPON ------------------
     function saveScore() {
+        // alert('DEBUG: Sending Score...'); // Uncomment for extreme debug
         const playerName = prompt("Enter your name:") || "Guest";
         const finalScore = score;
 
-        // Get CSRF token
         const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
 
         fetch('/save-score', {
@@ -301,49 +301,35 @@
         })
             .then(response => response.json())
             .then(data => {
+                // alert('DEBUG: Server Responded: ' + JSON.stringify(data)); 
+                
                 if (data.coupon_generated && data.coupon) {
                     // Show Coupon Footer Section
                     const section = document.getElementById('couponResultSection');
                     
-                    // Fill Data
-                    const codeEl = document.getElementById('generatedCouponCode');
-                    const discountEl = document.getElementById('modal-discountPercentage');
-                    const expiredEl = document.getElementById('modal-expiredAt');
-                    const minPurchaseEl = document.getElementById('modal-minPurchase');
-
-                    if (codeEl) codeEl.textContent = data.coupon.code;
-                    if (discountEl) discountEl.textContent = data.coupon.discount_percentage + '%';
-                    if (expiredEl) expiredEl.textContent = data.coupon.expired_at;
-                    if (minPurchaseEl) minPurchaseEl.textContent = 'Rp ' + data.coupon.min_purchase;
-
-                    // Show Section
                     if (section) {
                         section.style.display = 'block';
-                        // Scroll to section
                         section.scrollIntoView({ behavior: 'smooth' });
+                         // Force removal of hidden class if bootstrap interferes
+                        section.classList.remove('d-none', 'hidden');
+                    } else {
+                        alert('ERROR: Footer Section ID Not Found!');
                     }
                     
-                    // Setup Copy Button
-                    const copyBtn = document.getElementById('copyCouponBtn');
-                    if(copyBtn) {
-                        copyBtn.onclick = function() {
-                            navigator.clipboard.writeText(data.coupon.code).then(function() {
-                                var originalText = copyBtn.innerHTML;
-                                copyBtn.innerHTML = '<i class="fa-solid fa-check"></i> Tersalin!';
-                                setTimeout(function() {
-                                    copyBtn.innerHTML = originalText;
-                                }, 2000);
-                            });
-                        };
-                    }
+                    // Fill Data
+                    document.getElementById('generatedCouponCode').textContent = data.coupon.code;
+                    document.getElementById('modal-discountPercentage').textContent = data.coupon.discount_percentage + '%';
+                    document.getElementById('modal-expiredAt').textContent = data.coupon.expired_at;
+                    document.getElementById('modal-minPurchase').textContent = 'Rp ' + data.coupon.min_purchase;
 
                 } else if (data.message) {
+                    // Show message if coupon limit reached
                     alert(data.message);
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
-                alert('Maaf, terjadi kesalahan saat menyimpan skor. Silakan coba lagi. \nDetail: ' + error.message);
+                alert('Error Saving Score: ' + error.message);
             });
     }
 </script>

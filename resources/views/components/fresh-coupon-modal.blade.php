@@ -1,9 +1,5 @@
 <div id="couponResultSection" style="background: #fff; width: 100%; border-top: 5px solid #667eea; padding: 20px 0; margin-top: 20px; box-shadow: 0 -5px 20px rgba(0,0,0,0.1); position: relative; z-index: 999;">
-    <!-- DEBUG INDICATOR: Remove after fix -->
-    <div style="text-align: center; background: #ffffcc; padding: 5px; font-size: 10px; color: #333;">
-        SYSTEM STATUS: <span id="system-status">READY</span>
-    </div>
-
+    
     <div class="container text-center">
         <!-- Game Result Header -->
         <div style="background: #333; padding: 10px 20px; border-radius: 50px; color: white; display: inline-block; margin-bottom: 20px;">

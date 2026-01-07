@@ -286,10 +286,8 @@
 
         // 1. UPDATE UI INSTANTLY (Score)
         const scoreDisplay = document.getElementById('finalScoreDisplay');
-        const statusDisplay = document.getElementById('system-status');
 
         if (scoreDisplay) scoreDisplay.textContent = finalScore;
-        if (statusDisplay) statusDisplay.textContent = "SENDING DATA...";
 
         const couponSection = document.getElementById('couponDataSection');
         const noCouponMsg = document.getElementById('noCouponMessage');
@@ -314,10 +312,6 @@
         })
             .then(response => response.json())
             .then(data => {
-                // SYSTEM STATUS UPDATE
-                if (statusDisplay) statusDisplay.textContent = "SERVER RESPONSE OK";
-                if (statusDisplay) statusDisplay.style.color = "green";
-
                 if (data.coupon_generated && data.coupon) {
                     // WIN: Show Coupon Data
                     if (couponSection) couponSection.style.display = 'block';
@@ -358,10 +352,6 @@
             })
             .catch(error => {
                 console.error('Error:', error);
-                if (statusDisplay) {
-                    statusDisplay.textContent = "ERROR: " + error.message;
-                    statusDisplay.style.color = "red";
-                }
                 if (noCouponMsg) {
                    noCouponMsg.style.display = 'block';
                    noCouponMsg.innerHTML = `<p class="text-danger">Gagal menyimpan skor: ${error.message}. Coba refresh.</p>`;

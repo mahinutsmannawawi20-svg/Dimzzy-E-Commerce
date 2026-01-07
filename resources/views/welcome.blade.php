@@ -315,9 +315,26 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
+    
+    <!-- Custom CSS to Fix Mobile Buttons -->
+    <style>
+        /* Force Buttons to be Top Layer */
+        .cartcontainer {
+            z-index: 1000 !important;
+            position: relative;
+        }
+        .innerproductsection {
+            z-index: 1; /* Establish stacking context */
+        }
+        
+        /* On Mobile, keep buttons visible */
+        @media (max-width: 768px) {
+            section.section4 .col-sm-4 .innerproductsection .cartcontainer {
+                opacity: 1 !important;
+                bottom: 10px !important;
+            }
+        }
+    </style>
     
     <script>
         // Setup CSRF token for all AJAX requests

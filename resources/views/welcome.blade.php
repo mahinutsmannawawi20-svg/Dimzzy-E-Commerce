@@ -118,44 +118,25 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-4" data-aos="fade-right">
-                    <div class="innerproductsection">
-                        <img src="{{ asset('assets/Dimzzy Goreng.jpg') }}" alt="Logo Image" />
-                        <div class="cartcontainer">
-                            <button class="wishlist"><i class="fa-solid fa-heart"></i></button>
-                            <button class="btn">Tambah ke Keranjang <i class="fa-solid fa-cart-plus"></i></button>
-                            <button class="share"><i class="fa-solid fa-share"></i></button>
-                        </div>
-                        <h2>Dimsum Goreng Keju</h2>
-                        <h1 class="price"><span class="clrchange">Rp 7.000</span></h1>
-                    </div>
-                </div>
+                @forelse($products as $product)
                 <div class="col-sm-4" data-aos="fade-up">
                     <div class="innerproductsection">
-                        <img src="{{ asset('assets/Boba.jpg') }}" alt="Logo Image" />
+                        <img src="{{ asset($product->foto) }}" alt="{{ $product->nama_produk }}" style="height: 250px; object-fit: cover;" />
                         <div class="cartcontainer">
                             <button class="wishlist"><i class="fa-solid fa-heart"></i></button>
-                            <button class="btn">Tambah ke Keranjang <i class="fa-solid fa-cart-plus"></i></button>
+                            <button class="btn" onclick="addToCart({{ $product->id }})">Tambah ke Keranjang <i class="fa-solid fa-cart-plus"></i></button>
                             <button class="share"><i class="fa-solid fa-share"></i></button>
                         </div>
 
-                        <h2>Mojito Orange</h2>
-                        <h1 class="price"><span class="clrchange">Rp 12.000</span></h1>
+                        <h2>{{ $product->nama_produk }}</h2>
+                        <h1 class="price"><span class="clrchange">Rp {{ number_format($product->harga, 0, ',', '.') }}</span></h1>
                     </div>
                 </div>
-                <div class="col-sm-4" data-aos="fade-left">
-                    <div class="innerproductsection">
-                        <img src="{{ asset('assets/Boba2.jpg') }}" alt="Logo Image" />
-                        <div class="cartcontainer">
-                            <button class="wishlist"><i class="fa-solid fa-heart"></i></button>
-                            <button class="btn">Tambah ke Keranjang <i class="fa-solid fa-cart-plus"></i></button>
-                            <button class="share"><i class="fa-solid fa-share"></i></button>
-                        </div>
-
-                        <h2>Mojito Blueberry</h2>
-                        <h1 class="price"><span class="clrchange">Rp 12.000</span></h1>
-                    </div>
+                @empty
+                <div class="col-12 text-center">
+                    <p>Belum ada produk yang tersedia.</p>
                 </div>
+                @endforelse
             </div>
             <a href="{{ url('/produk') }}" class="btn btn-danger m-3 d-block mx-auto" style="width: fit-content;">
                 Show More Products

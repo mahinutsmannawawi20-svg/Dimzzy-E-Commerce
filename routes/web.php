@@ -1,14 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProductsController;
-use App\Http\Controllers\ScoreMinigameController;
-use App\Http\Controllers\CouponController;
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\PaymentController;
+use App\Models\Products;
 
 Route::get('/', function () {
-    return view('welcome');
+    $products = Products::all();
+    return view('welcome', compact('products'));
 });
 
 Route::get('/tentang-kami', function () {

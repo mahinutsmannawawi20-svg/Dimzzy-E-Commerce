@@ -60,7 +60,7 @@
 
                                 <ul class="navbar-nav ml-auto">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#" onclick="alert('Fitur Wishlist segera hadir! 💖')"><i class="fa-solid fa-heart"></i></a>
+                                        <a class="nav-link" href="{{ route('wishlist.index') }}"><i class="fa-solid fa-heart"></i></a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{ route('cart.index') }}">
@@ -127,7 +127,7 @@
                     <div class="innerproductsection">
                         <img src="{{ asset($product->foto) }}" alt="{{ $product->nama_produk }}" style="height: 250px; object-fit: cover;" />
                         <div class="cartcontainer">
-                            <button class="wishlist" onclick="alert('Fitur Wishlist segera hadir! 💖')"><i class="fa-solid fa-heart"></i></button>
+                            <button class="wishlist" onclick="toggleWishlist({{ $product->id }})"><i class="fa-solid fa-heart"></i></button>
                             <button class="btn" onclick="addToCart({{ $product->id }})"><i class="fa-solid fa-cart-shopping"></i></button>
                             <button class="share" onclick="alert('Fitur Share segera hadir! 🔗')"><i class="fa-solid fa-share"></i></button>
                         </div>
@@ -352,6 +352,26 @@
                 error: function(xhr) {
                     console.error(xhr);
                     alert('Terjadi kesalahan saat menambahkan ke keranjang.');
+                }
+            });
+        }
+
+        // Toggle Wishlist Function
+        function toggleWishlist(productId) {
+            $.ajax({
+                url: '/wishlist/toggle',
+                method: 'POST',
+                data: {
+                    product_id: productId
+                },
+                success: function(response) {
+                    if (response.success) {
+                        alert(response.message);
+                    }
+                },
+                error: function(xhr) {
+                    console.error(xhr);
+                    alert('Terjadi kesalahan saat menambahkan ke wishlist.');
                 }
             });
         }

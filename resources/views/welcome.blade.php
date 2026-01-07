@@ -99,7 +99,7 @@
             </div>
             <div class="row">
                 <div class="col-sm-6" data-aos="fade-right">
-                    <img src="{{ asset('assets/Dimzzy Goreng.jpg') }}" alt="Intro Image" id="img-1">
+                    <img src="{{ asset('images/dimzzy_intro.png') }}" alt="Intro Image" id="img-1" style="width: 100%; border-radius: 15px;">
                 </div>
                 <div class="col-sm-6" data-aos="fade-left">
                     <h2>Kenapa Harus Cobain Dimzzy</h2>

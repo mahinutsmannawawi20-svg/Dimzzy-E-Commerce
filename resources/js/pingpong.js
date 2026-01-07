@@ -290,6 +290,7 @@ function saveScore() {
             }
         })
         .catch(error => {
-            console.error('Error saving score:', error);
+            console.error('Error:', error);
+            alert('Maaf, terjadi kesalahan saat menyimpan skor. Silakan coba lagi. \nDetail: ' + error.message);
         });
 }

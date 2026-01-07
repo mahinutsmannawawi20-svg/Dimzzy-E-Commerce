@@ -6,11 +6,14 @@ use App\Http\Controllers\CouponController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\WishlistController;
+use App\Helpers\WishlistHelper;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     $products = Products::all();
-    return view('welcome', compact('products'));
+    $wishlistCount = WishlistHelper::getWishlistCount();
+    return view('welcome', compact('products', 'wishlistCount'));
 });
 
 Route::get('/tentang-kami', function () {

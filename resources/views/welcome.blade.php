@@ -60,7 +60,10 @@
 
                                 <ul class="navbar-nav ml-auto">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('wishlist.index') }}"><i class="fa-solid fa-heart"></i></a>
+                                        <a class="nav-link" href="{{ route('wishlist.index') }}">
+                                            <i class="fa-solid fa-heart"></i>
+                                            <span class="badge bg-danger" id="wishlistCount" style="font-size: 10px; vertical-align: super;">{{ $wishlistCount ?? 0 }}</span>
+                                        </a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{ route('cart.index') }}">
@@ -367,6 +370,10 @@
                 success: function(response) {
                     if (response.success) {
                         alert(response.message);
+                        // Update wishlist badge
+                        if (response.wishlist_count !== undefined) {
+                            $('#wishlistCount').text(response.wishlist_count);
+                        }
                     }
                 },
                 error: function(xhr) {

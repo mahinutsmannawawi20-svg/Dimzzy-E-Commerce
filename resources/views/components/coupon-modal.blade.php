@@ -55,6 +55,15 @@
 <script>
 // Function to show coupon modal
 function showCouponModal(couponData) {
+    // Debugging: Check if data is received
+    // alert('Coupon Data: ' + JSON.stringify(couponData));
+    
+    if (!couponData || !couponData.code) {
+        console.error('Invalid coupon data received:', couponData);
+        alert('Maaf, ada kesalahan saat menampilkan kupon. Silakan cek console.');
+        return;
+    }
+
     document.getElementById('couponCode').textContent = couponData.code;
     document.getElementById('discountPercentage').textContent = couponData.discount_percentage + '%';
     document.getElementById('expiredAt').textContent = couponData.expired_at;

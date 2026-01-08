@@ -33,7 +33,7 @@ Route::get('/dimzzsnake', function () {
 Route::view('/minigames', 'minigames')->name('minigames');
 
 // Score & Coupon Generation
-Route::post('/save-score', [ScoreMinigameController::class, 'store']);
+Route::post('/save-score', [ScoreMinigameController::class, 'store'])->name('score.save');
 
 // Coupon Routes
 Route::post('/coupons/generate', [CouponController::class, 'generate'])->name('coupons.generate');

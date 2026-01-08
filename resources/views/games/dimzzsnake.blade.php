@@ -4,8 +4,6 @@
     <style>
         html,
         body {
-            overflow: hidden;
-            height: 100%;
             margin: 0;
             padding: 0;
             background-color: #1a202c;
@@ -18,6 +16,7 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            padding-bottom: 2rem;
         }
     </style>
 
@@ -252,7 +251,7 @@
                     if (!contentType || !contentType.includes('application/json')) {
                         throw new Error(
                             `Server returned ${response.status}: ${response.statusText}. Expected JSON but got ${contentType}`
-                            );
+                        );
                     }
 
                     if (!response.ok) {
